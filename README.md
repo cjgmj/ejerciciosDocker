@@ -20,9 +20,47 @@ Si se realizan modificaciones en el `Dockerfile` es necesario volver a construir
 
 Se pueden ver las capas de una imagen ejecutando `docker history -H imagen:tag`. Si se quiere ver completo añadir al comando `--no-trunc`.
 
+Se pueden ver los logs de un contenedor con el comando `docker logs -f nombreContenedor`.
+
 ### Crear contenedor basado en nuestra imagen
 Para ver los contenedores ejecutar `docker ps` y `docker ps -a`.
 
-Para crear un contenedor a partir de nuestra imagen ejecutar `docker run -d --name nombreContenedor imagen:tag`. Si el parámetro nombre no es añadido, docker asigna un nombre. El parámetro `-d` es para ejecutar el contenedor en segundo plano. Se puede añadir el puerto en el que se va a ejecutar añadiendo `-p puertoLocal:puertoContenedor` después del nombre del contenedor, esto permite ver el servicio vía web.
+Para crear un contenedor a partir de nuestra imagen ejecutar `docker run -d --name nombreContenedor imagen:tag`. Si el parámetro nombre no es añadido, docker asigna un nombre. El parámetro `-d` es para ejecutar el contenedor en segundo plano. Se puede añadir el puerto en el que se va a ejecutar añadiendo `-p puertoLocal:puertoContenedor` después del nombre del contenedor, si se le indica, esto permite ver el servicio vía web.
 
 **Nota:** Para borrar un contenedor ejecutar `docker rm -fv nombreContenedor`.
+
+# Dockerfile
+El `Dockerfile` es el archivo donde se define la configuración de la imagen. 
+
+### FROM
+Es la imagen o el sistema operativo que será la base de nuestra imagen personalizada.
+
+### RUN
+Los comandos que se pueden ejecutar en la terminal. Se ejecutarán en la creación de la imagen.
+
+### COPY/ADD
+Sirve para copiar archivos de nuestra máquina hacia la imagen. Se debe usar `COPY` porque `ADD` nos permite agregar URLs directamente hacia un archivo, es decir, le puedes añadir una URL y descarga el código de dicha URL y lo añade a la carpeta especificada.
+
+### ENV
+Sirve para definir variables de entorno.
+
+### WORKDIR
+Indica dónde estás trabajando actualmente, es decir, sirve para cambiar de carpeta para la ejecución de los comandos. Funciona como el `cd`.
+
+### EXPOSE
+Indica que se puede exponer un puerto distinto al que se usa por defecto. Permite exponer cualquier puerto para poder ser utilizado.
+
+### LABEL
+Normalmente aparece al inicio del `Dockerfile` después del `FROM`. Es una etiqueta para dar metadatos a la imagen. Cuando los `LABEL` llevan espacios deben ir entre comillas.
+
+### USER
+Indica el usuario que ejecuta la tarea. Debe ser un usuario que exista en el sistema. Por defecto es el usuario `root`.
+
+### VOLUME
+Es una forma de colocar los datos de forma persistente dentro del contenedor, para que cuando el contenedor se elimine los datos no se pierdan.
+
+### CMD
+Es lo que mantiene vivo el contenedor, puede ser un proceso en primer plano que siempre se ejecute, pero también puede ser un script.
+
+### .dockerignore
+Es un archivo oculto. Sirve para ignorar cualquier cosa que esté en el directorio de trabajo actual.

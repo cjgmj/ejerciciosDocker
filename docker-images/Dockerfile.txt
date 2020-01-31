@@ -1,5 +1,35 @@
 FROM centos
 
+LABEL version=1.0
+LABEL description="This is an apache image"
+LABEL vendor=cjgmj
+
 RUN yum install httpd -y
 
-CMD apachectl -DFOREGROUND
+WORKDIR /var/www/html
+
+COPY startbootstrap-freelancer-master .
+
+RUN echo "$(whoami)" > user1.html
+
+RUN useradd cjgmj
+
+USER cjgmj
+
+RUN echo "$(whoami)" > ../../../tmp/user2.html
+
+VOLUME .
+
+USER root
+
+RUN mv ../../../tmp/user2.html .
+
+ENV contenido prueba
+
+RUN echo "$contenido" > prueba.html
+
+EXPOSE 8080
+
+COPY run.sh ../../../run.sh
+
+CMD sh ../../../run.sh
