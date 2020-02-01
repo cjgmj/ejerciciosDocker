@@ -25,7 +25,7 @@ Se pueden ver los logs de un contenedor con el comando `docker logs -f nombreCon
 ### Crear contenedor basado en nuestra imagen
 Para ver los contenedores ejecutar `docker ps` y `docker ps -a`.
 
-Para crear un contenedor a partir de nuestra imagen ejecutar `docker run -d --name nombreContenedor imagen:tag`. Si el parámetro nombre no es añadido, docker asigna un nombre. El parámetro `-d` es para ejecutar el contenedor en segundo plano. Se puede añadir el puerto en el que se va a ejecutar añadiendo `-p puertoLocal:puertoContenedor` después del nombre del contenedor, si se le indica, esto permite ver el servicio vía web.
+Para crear un contenedor a partir de nuestra imagen ejecutar `docker run -d --name nombreContenedor imagen:tag`. Si el parámetro nombre no es añadido, Docker asigna un nombre. El parámetro `-d` es para ejecutar el contenedor en segundo plano. Se puede añadir el puerto en el que se va a ejecutar añadiendo `-p puertoLocal:puertoContenedor` después del nombre del contenedor, si se le indica, esto permite ver el servicio vía web.
 
 **Nota:** Para borrar un contenedor ejecutar `docker rm -fv nombreContenedor`.
 
@@ -39,13 +39,13 @@ Es la imagen o el sistema operativo que será la base de nuestra imagen personal
 Los comandos que se pueden ejecutar en la terminal. Se ejecutarán en la creación de la imagen.
 
 ### COPY/ADD
-Sirve para copiar archivos de nuestra máquina hacia la imagen. Se debe usar `COPY` porque `ADD` nos permite agregar URLs directamente hacia un archivo, es decir, le puedes añadir una URL y descarga el código de dicha URL y lo añade a la carpeta especificada.
+Sirve para copiar archivos de nuestra máquina hacia la imagen. Se debe usar `COPY` porque `ADD` nos permite agregar URLs directamente hacia un archivo, es decir, se puede añadir una URL y descarga el código de dicha URL y lo añade a la carpeta especificada.
 
 ### ENV
 Sirve para definir variables de entorno.
 
 ### WORKDIR
-Indica dónde estás trabajando actualmente, es decir, sirve para cambiar de carpeta para la ejecución de los comandos. Funciona como el `cd`.
+Indica dónde se está trabajando actualmente, es decir, sirve para cambiar de carpeta para la ejecución de los comandos. Funciona como el `cd`.
 
 ### EXPOSE
 Indica que se puede exponer un puerto distinto al que se usa por defecto. Permite exponer cualquier puerto para poder ser utilizado.
