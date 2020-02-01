@@ -75,3 +75,7 @@ Hay una serie de buenas prácticas a tener en cuenta a la hora de crear un archi
 6. Se pueden pasar varios argumentos en una sola capa en vez de escribir varias instrucciones en distintas capas, se concatenan los comando con `&&`.
 7. No instalar paquetes innecesarios.
 8. Es bueno usar `LABEL` para añadir los metadatos a la imagen, por ejemplo, la versión, una descripción, etc.
+---
+### Generar certificado SSL
+Para generar un certificado SSL ejecutar `openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout docker.key -out docker.crt
+`.
