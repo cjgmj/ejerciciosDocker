@@ -20,6 +20,8 @@ Si no encontramos en `Google` o en `docker hub` una imagen, podemos crearla noso
 
 Si se realizan modificaciones en el `Dockerfile` es necesario volver a construir la imagen.
 
+**Nota:** Si el archivo tiene un nombre distinto a `Dockerfile` hay que añadir en el comando de construcción `-f nombreFichero`.
+
 Se pueden ver las capas de una imagen ejecutando `docker history -H imagen:tag`. Si se quiere ver completo añadir al comando `--no-trunc`.
 
 Se pueden ver los logs de un contenedor con el comando `docker logs -f nombreContenedor`.
