@@ -8,6 +8,8 @@ Las imágenes se almacenan en [docker hub](https://hub.docker.com/), un lugar p�
 
 Normalmente, las imágenes oficiales explican cómo funciona, cómo se hacen y cómo se crean los contenedores en la documentación dentro de la página en [docker hub](https://hub.docker.com/).
 
+Para eliminar una imagen ejecutar el comando `docker rmi` seguido del nombre de la imagen con el tag, `docker rmi imagen:tag`, o directamente el id de la imagen, `docker rmi id`. Se pueden eliminar varias imágenes seguidas separándolas con espacios.
+
 ### Crear nuestra propia imagen
 Si no encontramos en `Google` o en `docker hub` una imagen, podemos crearla nosotros mismos. Para generar nuestra propia imagen hay que seguir los siguiente pasos:
 1. Crear `Dockerfile`.
