@@ -15,7 +15,7 @@ Si no encontramos en `Google` o en `docker hub` una imagen, podemos crearla noso
 1. Crear `Dockerfile`.
 	· La primera instrucción normalmente debe ser `FROM` indica el sistema operativo. Para los sistemas operativos hay imágenes oficiales.
 	· Con `RUN` se ejecutan las instalaciones en el sistema operativo elegido.
-2. Una vez terminado, ejecutamos `docker build --tag nombreImagenResultante .` para construir la imagen tomando de base el `Dockerfile`. Se puede sustituir `--tag` por `-t`. Se le puede añadir tag agregando en el comando `nombreImagenResultante:tag`.
+2. Una vez terminado, ejecutamos `docker build --tag nombreImagenResultante .` para construir la imagen tomando de base el `Dockerfile`. Se puede sustituir `--tag` por `-t`. Se le puede añadir tag agregando en el comando `nombreImagenResultante:tag`, por defecto utiliza el tag `latest`.
 3.  Para que la imagen no se detenga es necesario añadir el `CMD` para ejecutar la imagen en primer plano.
 
 Si se realizan modificaciones en el `Dockerfile` es necesario volver a construir la imagen.
@@ -79,7 +79,12 @@ Hay una serie de buenas prácticas a tener en cuenta a la hora de crear un archi
 6. Se pueden pasar varios argumentos en una sola capa en vez de escribir varias instrucciones en distintas capas, se concatenan los comando con `&&`.
 7. No instalar paquetes innecesarios.
 8. Es bueno usar `LABEL` para añadir los metadatos a la imagen, por ejemplo, la versión, una descripción, etc.
+
+# Dangling images
+Son las imágenes que no tienen un nombre ni un tag. Esto ocurre al construir varias veces una imagen con el mismo nombre, el mismo tag y con distinto contenido. Las capas en las imágenes solo tienen permisos de sólo lectura, por lo cuál, no puede modificar una capa. Esto provoca que cuando se modifica una capa se genera una nueva imagen, quitándole la referencia a la imagen anterior, si existía una con el mismo nombre, para asignársela a la nueva. Este problema se soluciona definiendo tags al crear la imagen.
+
+Se puede mostrar las imágenes de este tipo ejecutando `docker images --filter dangling=true`. Se puede sustituir `--filter` por `-f`. Si se le añade `-q` al comando anterior muestra solamente los IDs. Es posible eliminar éstas imágenes ejecutando `docker images -f dangling=true -q | xargs docker rmi`.
+
 ---
 ### Generar certificado SSL
-Para generar un certificado SSL ejecutar `openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout docker.key -out docker.crt
-`.
+Para generar un certificado SSL ejecutar `openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout docker.key -out docker.crt`.
