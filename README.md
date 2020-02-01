@@ -37,7 +37,7 @@ Para crear un contenedor a partir de nuestra imagen ejecutar `docker run -d --na
 El `Dockerfile` es el archivo donde se define la configuración de la imagen. 
 
 ### FROM
-Es la imagen o el sistema operativo que será la base de nuestra imagen personalizada.
+Es la imagen o el sistema operativo que será la base de nuestra imagen personalizada. Se les pueden añadir alias con `as`.
 
 ### RUN
 Los comandos que se pueden ejecutar en la terminal. Se ejecutarán en la creación de la imagen.
@@ -84,6 +84,9 @@ Hay una serie de buenas prácticas a tener en cuenta a la hora de crear un archi
 Son las imágenes que no tienen un nombre ni un tag. Esto ocurre al construir varias veces una imagen con el mismo nombre, el mismo tag y con distinto contenido. Las capas en las imágenes solo tienen permisos de sólo lectura, por lo cuál, no puede modificar una capa. Esto provoca que cuando se modifica una capa se genera una nueva imagen, quitándole la referencia a la imagen anterior, si existía una con el mismo nombre, para asignársela a la nueva. Este problema se soluciona definiendo tags al crear la imagen.
 
 Se puede mostrar las imágenes de este tipo ejecutando `docker images --filter dangling=true`. Se puede sustituir `--filter` por `-f`. Si se le añade `-q` al comando anterior muestra solamente los IDs. Es posible eliminar éstas imágenes ejecutando `docker images -f dangling=true -q | xargs docker rmi`.
+
+# Multi-Stage-Build
+Esta característica nos permite usar varios `FROM` dentro del mismo `Dockerfile` para construir imágenes diferentes con temas de dependencias. Por ejemplo, construir un JAR desde una imagen Maven y copiarlo hacia una imagen Java en el mismo proceso dentro del mismo `Dockerfile`. Solo tiene en cuenta el último `FROM` para darle valor a la imagen final, los anteriores se toman como procesos temporales, es decir, que no será contenido por la imagen resultante.
 
 ---
 ### Generar certificado SSL
