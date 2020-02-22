@@ -103,3 +103,18 @@ Para crear un contenedor necesitamos una imagen, que se usará de base. Una vez 
 
 ### Borrar contenedor
 Para borrar un contenedor se utiliza el comando `docker rm -f nombreContenedor`, el `-f` fuerza el borrado del contenedor, por si el contenedor está arrancado, se pueden pasar varios contenedores en el mismo comando separados por espacios.
+
+### Renombrar contenedor
+Se puede renombrar un contenedor ya existente con `docker rename nombreAntiguo nombreNuevo`.
+
+### Detener contenedor
+Para detener un contenedor ejecutar el comando `docker stop nombreContenedor`, además de por el nombre del contenedor también se puede parar con el id.
+
+### Arrancar contenedor
+Para arrancar un contenedor ejecutar el comando `docker start nombreContenedor`, además de por el nombre del contenedor también se puede iniciar con el id.
+
+### Reiniciar contenedor
+Para reiniciar un contenedor ejecutar el comando `docker restart nombreContenedor`, además de por el nombre del contenedor también se puede reiniciar con el id, normalmente esto se hace si el contenedor está consumiendo mucha RAM o el contenedor tarda en reaccionar.
+
+### Acceder a un contenedor
+Para acceder a un contenedor para modificar su contenido usamos `docker exec -ti nombreContenedor bash`, `-t` específica que sea para una terminal, `-i` que sea interactivo y `bash` para el tipo de terminal, también es posible usar `sh`. Podemos ver el usuario escribiendo `whoami` y el host con `hostname`. Para salir de la edición escribimos `exit`. Podemos cambiar el usuario añadiendo en el comando de modificación de contenido `-u nombreUsuario`, por ejemplo el usuario `root`, para no tener problemas de permisos. El entrar en un contenedor es útil para observar partes del contenedor, como puede ser un archivo, ya que permite acceder al sistema de archivos del contenedor.
