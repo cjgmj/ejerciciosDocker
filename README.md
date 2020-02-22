@@ -94,3 +94,12 @@ Para generar un certificado SSL ejecutar `openssl req -x509 -nodes -days 365 -ne
 
 # Containers
 Los contenedores son una instancia de ejecución de una imagen. Los contenedores son temporales, por lo que si queremos que un cambio sea persistente debemos definirlo en el `Dockerfile`, en la imagen, nunca debemos hacer los cambios en el contenedor ya que esos cambios son temporales y se eliminarían esos cambios al eliminar el contenedor. A diferencia de las imágenes, dónde las capas son solo lectura, en los contenedores las capas son de lectura y escritura. Además, podemos crear varios contenedores partiendo de una misma imagen, es decir, podemos crear tantos contenedores como queramos a partir de una misma imagen que ya esté diseña y construida, ya que, la imagen sirve como plantilla para todos los contenedores que queramos crear.
+
+### Listar contenedores
+Para listar contenedores se utiliza el comando `docker ps`, para listar también los que están detenidos usamos `docker ps -a`.
+
+### Crear contenedor
+Para crear un contenedor necesitamos una imagen, que se usará de base. Una vez tengamos una imagen, ejecutamos el comando `docker run -d nombreImagen`, `-d` indica que el contenedor se ejecutará en segundo plano. Para poder ver la imagen en el navegador debemos mapear el puerto añadiéndole al comando `-p puertoMaquina:puertoContenedor`, si ya hay un contenedor levantado, el nombre de la imagen se sitúa al final, el `puertoMaquina` es el puerto al que se quiere mapear, no necesariamente tiene que ser el `puertoContenedor`.
+
+### Borrar contenedor
+Para borrar un contenedor se utiliza el comando `docker rm -f nombreContenedor`, el `-f` fuerza el borrado del contenedor, por si el contenedor está arrancado, se pueden pasar varios contenedores en el mismo comando separados por espacios.
