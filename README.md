@@ -99,10 +99,10 @@ Los contenedores son una instancia de ejecución de una imagen. Los contenedores
 Para listar contenedores se utiliza el comando `docker ps`, para listar también los que están detenidos usamos `docker ps -a`.
 
 ### Crear contenedor
-Para crear un contenedor necesitamos una imagen, que se usará de base. Una vez tengamos una imagen, ejecutamos el comando `docker run -d nombreImagen`, `-d` indica que el contenedor se ejecutará en segundo plano. Para poder ver la imagen en el navegador debemos mapear el puerto añadiéndole al comando `-p puertoMaquina:puertoContenedor`, si ya hay un contenedor levantado, el nombre de la imagen se sitúa al final, el `puertoMaquina` es el puerto al que se quiere mapear, no necesariamente tiene que ser el `puertoContenedor`.
+Para crear un contenedor necesitamos una imagen, que se usará de base. Una vez tengamos una imagen, ejecutamos el comando `docker run -d nombreImagen`, `-d` indica que el contenedor se ejecutará en segundo plano. Se usa `-dti` si la imagen tiene un sistema operativo. Se puede añadir un nombre con `--name nombreContenedor`. Para poder ver la imagen en el navegador debemos mapear el puerto añadiéndole al comando `-p puertoMaquina:puertoContenedor`, si ya hay un contenedor levantado, el nombre de la imagen se sitúa al final, el `puertoMaquina` es el puerto al que se quiere mapear, no necesariamente tiene que ser el `puertoContenedor`. Se puede crear una variable de entorno añadiendo `-e "nombreVariable=valorVariable"`.
 
 ### Borrar contenedor
-Para borrar un contenedor se utiliza el comando `docker rm -f nombreContenedor`, el `-f` fuerza el borrado del contenedor, por si el contenedor está arrancado, se pueden pasar varios contenedores en el mismo comando separados por espacios.
+Para borrar un contenedor se utiliza el comando `docker rm -f nombreContenedor`, el `-f` fuerza el borrado del contenedor, por si el contenedor está arrancado, se pueden pasar varios contenedores en el mismo comando separados por espacios. Se pueden eliminar todos los contenedores a la vez con `docker ps -q | xargs docker rm -f`.
 
 ### Renombrar contenedor
 Se puede renombrar un contenedor ya existente con `docker rename nombreAntiguo nombreNuevo`.
@@ -117,4 +117,7 @@ Para arrancar un contenedor ejecutar el comando `docker start nombreContenedor`,
 Para reiniciar un contenedor ejecutar el comando `docker restart nombreContenedor`, además de por el nombre del contenedor también se puede reiniciar con el id, normalmente esto se hace si el contenedor está consumiendo mucha RAM o el contenedor tarda en reaccionar.
 
 ### Acceder a un contenedor
-Para acceder a un contenedor para modificar su contenido usamos `docker exec -ti nombreContenedor bash`, `-t` específica que sea para una terminal, `-i` que sea interactivo y `bash` para el tipo de terminal, también es posible usar `sh`. Podemos ver el usuario escribiendo `whoami` y el host con `hostname`. Para salir de la edición escribimos `exit`. Podemos cambiar el usuario añadiendo en el comando de modificación de contenido `-u nombreUsuario`, por ejemplo el usuario `root`, para no tener problemas de permisos. El entrar en un contenedor es útil para observar partes del contenedor, como puede ser un archivo, ya que permite acceder al sistema de archivos del contenedor.
+Para acceder a un contenedor para modificar su contenido usamos `docker exec -ti nombreContenedor bash`, `-t` específica que sea para una terminal, `-i` que sea interactivo y `bash` para el tipo de terminal, también es posible usar `sh`. Podemos ver el usuario escribiendo `whoami`, el host con `hostname` y las variables de entorno con `env`. Para salir de la edición escribimos `exit`. Podemos cambiar el usuario añadiendo en el comando de modificación de contenido `-u nombreUsuario`, por ejemplo el usuario `root`, para no tener problemas de permisos. El entrar en un contenedor es útil para observar partes del contenedor, como puede ser un archivo, ya que permite acceder al sistema de archivos del contenedor.
+
+### Variables de entorno
+Es una variable a la que podemos acceder desde cualquier parte del contenedor. Las variables de entorno se pueden definir en un `Dockerfile` o añadiéndola a la hora de crear el contenedor.
