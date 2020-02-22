@@ -91,3 +91,6 @@ Esta característica nos permite usar varios `FROM` dentro del mismo `Dockerfile
 ---
 ### Generar certificado SSL
 Para generar un certificado SSL ejecutar `openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout docker.key -out docker.crt`.
+
+# Containers
+Los contenedores son una instancia de ejecución de una imagen. Los contenedores son temporales, por lo que si queremos que un cambio sea persistente debemos definirlo en el `Dockerfile`, en la imagen, nunca debemos hacer los cambios en el contenedor ya que esos cambios son temporales y se eliminarían esos cambios al eliminar el contenedor. A diferencia de las imágenes, dónde las capas son solo lectura, en los contenedores las capas son de lectura y escritura. Además, podemos crear varios contenedores partiendo de una misma imagen, es decir, podemos crear tantos contenedores como queramos a partir de una misma imagen que ya esté diseña y construida, ya que, la imagen sirve como plantilla para todos los contenedores que queramos crear.
