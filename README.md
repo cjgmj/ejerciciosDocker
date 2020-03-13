@@ -1,7 +1,7 @@
 # ejerciciosDocker
 
 # Images
-Para ver las imágenes escribir en la terminal `docker images`.
+Para ver las imágenes escribir en la terminal `docker images`. Se puede filtar mediante `| grep nombreImagen`, no es necesario el nombre completo.
 En las imágenes viene toda la configuración que necesita un contenedor para funcionar.
 
 Las imágenes se almacenan en [docker hub](https://hub.docker.com/), un lugar público donde se puede subir imágenes. Se pueden versionar las imágenes con tags. Para descargar un tag específico de una imagen escribir en la terminal `docker pull imagen:tag`.
@@ -27,7 +27,7 @@ Se pueden ver las capas de una imagen ejecutando `docker history -H imagen:tag`.
 Se pueden ver los logs de un contenedor con el comando `docker logs -f nombreContenedor`.
 
 ### Crear contenedor basado en nuestra imagen
-Para ver los contenedores ejecutar `docker ps` y `docker ps -a`.
+Para ver los contenedores ejecutar `docker ps` y `docker ps -a`. Podemos ver el último contenedor creado con `docker ps -l`.
 
 Para crear un contenedor a partir de nuestra imagen ejecutar `docker run -d --name nombreContenedor imagen:tag`. Si el parámetro nombre no es añadido, Docker asigna un nombre. El parámetro `-d` es para ejecutar el contenedor en segundo plano. Se puede añadir el puerto en el que se va a ejecutar añadiendo `-p puertoLocal:puertoContenedor` después del nombre del contenedor, si se le indica, esto permite ver el servicio vía web.
 
@@ -142,3 +142,6 @@ Descargar las tres imágenes con `docker pull httpd`, `docker pull nginx` y `doc
 
 #### Crear contenedor [PostgreSQL](https://hub.docker.com/_/postgres)
 Descargar la imagen con `docker pull postgres`. Podemos encontrar varios parámetros configurables con variables de entorno en el apartado [Environment Variables](https://hub.docker.com/_/postgres), un ejemplo sería `docker run -d --name postgres -e "POSTGRES_PASSWORD=contraseñaUsuario" -e "POSTGRES_USER=usuarioBD" -e "POSTGRES_DB=nombreBDD" -p 5432:5432 postgres`. Accedemos al contenedor mediante `docker exec -ti postgres bash`, para comprobar que existe el usuario indicado en el comando escribimos `psql -d nombreBDD -U usuarioBD`.
+
+#### Crear contenedor [Jenkins](https://hub.docker.com/_/jenkins/)
+Descargar la imagen con `docker pull jenkins`. Creamos el contenedor con `docker run -d -p 7070:8080 --name jenkins jenkins`. Una vez creado podremos ver la página principal de Jenkins en `localhost:7070`. Para desbloquear Jenkins accedemos al contenedor, `docker exec -ti jenkins bash`, y ejecutamos el comando `cat /var/jenkins_home/secrets/initialAdminPassword`.
