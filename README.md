@@ -136,3 +136,6 @@ El primer paso es descargar la imagen de MySQL mediante el comando `docker pull 
 
 #### Crear contenedor [MongoDB](https://hub.docker.com/_/mongo)
 Descargar la imagen de mongo mediante el comando `docker pull mongo`. Para crear el contenedor lanzamos el comando `docker run -d --name my-mongo -p 27017:27017 mongo`.
+
+#### Crear contenedor [Apache](https://hub.docker.com/_/httpd) / [Nginx](https://hub.docker.com/_/nginx) / [Tomcat](https://hub.docker.com/_/tomcat)
+Descargar las tres imágenes con `docker pull httpd`, `docker pull nginx` y `docker pull tomcat`. Creamos el contenedor de Nginx con `docker run -d -p 8888:80 --name nginx nginx`, una vez creado podremos comprobar que se creó correctamente accediendo a `localhost:8888`. Para crear un contenedor de Apache sin eliminar el de Nginx ejecutamos `docker run -d -p 9999:80 --name apache httpd`, comprobamos que se creó correctamente accediendo a `localhost:9999`. Creamos el contenedor tomcat con `docker run -d -p 7070:8080 --name tomcat tomcat:9.0.8-jre8-alpine`, una vez creado podemos acceder a la página inicial de Tomcat en `localhost:7070`.
