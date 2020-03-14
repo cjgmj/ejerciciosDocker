@@ -163,3 +163,6 @@ Para hacerlo de forma inversa, por ejemplo para obtener un archivo de log, `dock
 
 ### Convertir un contenedor en una imagen
 Para usar el estado actual de un contenedor arrancado y transformarlo en una imagen usamos `docker commit`. Esto nos sirve por si queremos persistir unos cambios realizados en un contenedor, ya que los cambios dentro de un contenedor son temporales, se pierden al eliminarlo. Para capturar el estado actual del contenedor en una nueva imagen usamos `docker commit nombreContenedor nombreImagenResultante`. Es posible que se pierda el cmd, por lo que en el comando de creación del contenedor a partir de la imagen resultante añadimos `/bin/bash` o simplemente `bash`. Para que los archivos no se pierdan al crear la nueva imagen, los archivos modificados deben estar fuera de las rutas definidas en los `VOLUME`.
+
+### Sobrescribir el CMD de una imagen
+Para sobrescribir el CMD de una imagen no es necesario el uso de un `Dockerfile`. Para ello, añadimos como último argumento en el comando de creación de docker el `COMMAND` deseado, por ejemplo `docker run -d -p 8080:8080 centos python -m SimpleHTTPServer 8080`.
