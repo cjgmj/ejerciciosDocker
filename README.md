@@ -8,7 +8,7 @@ Las imágenes se almacenan en [docker hub](https://hub.docker.com/), un lugar p�
 
 Normalmente, las imágenes oficiales explican cómo funciona, cómo se hacen y cómo se crean los contenedores en la documentación dentro de la página en [docker hub](https://hub.docker.com/).
 
-Para eliminar una imagen ejecutar el comando `docker rmi` seguido del nombre de la imagen con el tag, `docker rmi imagen:tag`, o directamente el id de la imagen, `docker rmi id`. Se pueden eliminar varias imágenes seguidas separándolas con espacios.
+Para eliminar una imagen ejecutar el comando `docker rmi` seguido del nombre de la imagen con el tag, `docker rmi imagen:tag`, o directamente el id de la imagen, `docker rmi id`. Para forzar la eliminación de la imagen añadimos `-f` al comando. Se pueden eliminar varias imágenes seguidas separándolas con espacios. Se pueden borrar todas las imágenes a la vez usando `docker rmi $(docker images -q)`.
 
 ### Crear nuestra propia imagen
 Si no encontramos en `Google` o en `docker hub` una imagen, podemos crearla nosotros mismos. Para generar nuestra propia imagen hay que seguir los siguiente pasos:
@@ -105,7 +105,7 @@ Podemos ver todo el contenido del contenedor con `docker inspect nombreContenedo
 Podemos ver información relativa a los contenedores, por ejemplo la RAM que consume cada uno, mediante el comando `docker stats`. Esta consulta se puede filtrar por `nombreContenedor` o por el `idContenedor`.
 
 ### Crear contenedor
-Para crear un contenedor necesitamos una imagen, que se usará de base. Una vez tengamos una imagen, ejecutamos el comando `docker run -d nombreImagen`, `-d` indica que el contenedor se ejecutará en segundo plano. Se usa `-dti` si la imagen tiene un sistema operativo. Se puede añadir un nombre con `--name nombreContenedor`. Para poder ver la imagen en el navegador debemos mapear el puerto añadiéndole al comando `-p puertoMaquina:puertoContenedor`, si ya hay un contenedor levantado, el nombre de la imagen se sitúa al final, el `puertoMaquina` es el puerto al que se quiere mapear, no necesariamente tiene que ser el `puertoContenedor`. Se puede crear una variable de entorno añadiendo `-e "nombreVariable=valorVariable"`. Si la imagen no está descargada previamente, se descargará automáticamente antes de crear el contenedor.
+Para crear un contenedor necesitamos una imagen, que se usará de base. Una vez tengamos una imagen, ejecutamos el comando `docker run -d nombreImagen`, `-d` indica que el contenedor se ejecutará en segundo plano. Se usa `-dti` o `-d -ti` si la imagen tiene un sistema operativo. Se puede añadir un nombre con `--name nombreContenedor`. Para poder ver la imagen en el navegador debemos mapear el puerto añadiéndole al comando `-p puertoMaquina:puertoContenedor`, si ya hay un contenedor levantado, el nombre de la imagen se sitúa al final, el `puertoMaquina` es el puerto al que se quiere mapear, no necesariamente tiene que ser el `puertoContenedor`. Se puede crear una variable de entorno añadiendo `-e "nombreVariable=valorVariable"`. Si la imagen no está descargada previamente, se descargará automáticamente antes de crear el contenedor.
 
 ### Borrar contenedor
 Para borrar un contenedor se utiliza el comando `docker rm -f nombreContenedor`, el `-f` fuerza el borrado del contenedor, por si el contenedor está arrancado, se pueden pasar varios contenedores en el mismo comando separados por espacios. Se pueden eliminar todos los contenedores a la vez con `docker ps -q | xargs docker rm -f`.
@@ -145,3 +145,8 @@ Descargar la imagen con `docker pull postgres`. Podemos encontrar varios paráme
 
 #### Crear contenedor [Jenkins](https://hub.docker.com/_/jenkins/)
 Descargar la imagen con `docker pull jenkins`. Creamos el contenedor con `docker run -d -p 7070:8080 --name jenkins jenkins`. Una vez creado podremos ver la página principal de Jenkins en `localhost:7070`. Para desbloquear Jenkins accedemos al contenedor, `docker exec -ti jenkins bash`, y ejecutamos el comando `cat /var/jenkins_home/secrets/initialAdminPassword`, obtenemos el texto devuelto y lo introducimos en el formulario.
+
+---
+
+### Administrar usuarios
+Contruimos la imagen a partir del nuevo `Dockerfile` con `docker build -t centos:prueba -f Dockerfile_usuarios.txt .`. Una vez creada la imagen creamos un contenedor a partir de ella con `docker run -d -ti --name prueba centos:prueba`. Accedemos al contenedor con `docker exec -ti prueba bash`, podemos acceder con un usuario existente añadiendo al comando `-u nombreUsuario`, y comprobamos que estamos en un sistema centos con `cat /etc/redhat-release`, podemos ver que usuario estamos usando con `whoami`.

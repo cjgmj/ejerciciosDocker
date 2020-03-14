@@ -1,0 +1,7 @@
+FROM centos
+
+ENV prueba 1234
+
+RUN useradd test
+
+USER test
