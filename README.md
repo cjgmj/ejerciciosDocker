@@ -166,3 +166,6 @@ Para usar el estado actual de un contenedor arrancado y transformarlo en una ima
 
 ### Sobrescribir el CMD de una imagen
 Para sobrescribir el CMD de una imagen no es necesario el uso de un `Dockerfile`. Para ello, añadimos como último argumento en el comando de creación de docker el `COMMAND` deseado, por ejemplo `docker run -d -p 8080:8080 centos python -m SimpleHTTPServer 8080`.
+
+### Destruir contenedores automáticamente
+Para crear un contenedor autodestruible añadimos en el comando de creación `--rm`, esto indica a Docker que el contenedor es temporal y que una vez que salgamos del contenedor debe ser eliminado. Al ser una ejecución temporal no hay que añadir en el comando `-d` y no hace falta definir el nombre, por ejemplo `docker run --rm -ti centos bash`.
