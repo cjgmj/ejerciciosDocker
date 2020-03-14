@@ -150,3 +150,8 @@ Descargar la imagen con `docker pull jenkins`. Creamos el contenedor con `docker
 
 ### Administrar usuarios
 Contruimos la imagen a partir del nuevo `Dockerfile` con `docker build -t centos:prueba -f Dockerfile_usuarios.txt .`. Una vez creada la imagen creamos un contenedor a partir de ella con `docker run -d -ti --name prueba centos:prueba`. Accedemos al contenedor con `docker exec -ti prueba bash`, podemos acceder con un usuario existente añadiendo al comando `-u nombreUsuario`, y comprobamos que estamos en un sistema centos con `cat /etc/redhat-release`, podemos ver que usuario estamos usando con `whoami`.
+
+### Limitar recursos a un contenedor
+Para ver los recursos de nuestra máquina escribimos `free -h`. Para limitar el uso de RAM por parte del contenedor, y limitarla por ejemplo a 500MB, añadimos al comando de creación del contenedor `-m "500mb"`, para GB usar `gb`. Podemos ver todas las opciones para gestionar la memoria con `docker run --help | grep memory`. 
+
+Para mirar el número de CPUs que hay en nuestra máguina escribimos `grep "model name" /proc/cpuinfo`, podemos sacar el número total añadiendo `| wc -l`. Para limitar el uso de CPU por parte del contenedor, por ejemplo solo para la CPU 0 y la CPU 1, ya que las CPUs se empiezan a contar desde 0, añadimos al comando de creación del contenedor `--cpuset-cpus 0-1`. Podemos ver todas las opciones para gestionar la memoria con `docker run --help | grep cpu`.
