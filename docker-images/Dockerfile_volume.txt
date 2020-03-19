@@ -1,0 +1,4 @@
+FROM centos
+
+# Crea un volume anonymus
+VOLUME /opt/

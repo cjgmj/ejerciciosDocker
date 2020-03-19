@@ -180,6 +180,8 @@ Los volúmenes son herramientas que nos permiten almacenar datos persistentes de
 - Anonymus: son los volúmenes que se almacenan en una carpeta autogenerada por Docker.
 - Named Volumes: son volúmenes creados por nosotros, normalmente de carpetas administradas por Docker, pero a diferencia de los anonymus, sí tienen un nombre y son controlados por Docker.
 
+Se puede consultar los volúmenes con el comando `docker volume ls`.
+
 ### Volume host
 En el comando de creación de un contenedor debemos añadir `-v carpetaLocal:carpetaContenedor`, quedando de esta forma `docker run -d -p 3306:3306 --name db -e "MYSQL_ROOT_PASSWORD=0000" -v /opt/mysql/:/var/lib/mysql mysql:5.7`. De esta forma, los archivos generados por el contenedor estarán también en nuestra máquina, por lo que, aunque se elimine el contenedor seguiremos teniendo sus datos. Para volver a crear el contenedor con los datos guardados, basta con volver a crear el contenedor con el mismo comando.
 
