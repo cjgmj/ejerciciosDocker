@@ -145,7 +145,7 @@ Descargar las tres imágenes con `docker pull httpd`, `docker pull nginx` y `doc
 Descargar la imagen con `docker pull postgres`. Podemos encontrar varios parámetros configurables con variables de entorno en el apartado [Environment Variables](https://hub.docker.com/_/postgres), un ejemplo sería `docker run -d --name postgres -e "POSTGRES_PASSWORD=contraseñaUsuario" -e "POSTGRES_USER=usuarioBD" -e "POSTGRES_DB=nombreBDD" -p 5432:5432 postgres`. Accedemos al contenedor mediante `docker exec -ti postgres bash`, para comprobar que existe el usuario indicado en el comando escribimos `psql -d nombreBDD -U usuarioBD`.
 
 #### Crear contenedor [Jenkins](https://hub.docker.com/_/jenkins/)
-Descargar la imagen con `docker pull jenkins`. Creamos el contenedor con `docker run -d -p 7070:8080 --name jenkins jenkins`. Una vez creado podremos ver la página principal de Jenkins en `localhost:7070`. Para desbloquear Jenkins accedemos al contenedor, `docker exec -ti jenkins bash`, y ejecutamos el comando `cat /var/jenkins_home/secrets/initialAdminPassword`, obtenemos el texto devuelto y lo introducimos en el formulario.
+Descargar la imagen con `docker pull jenkins`. Creamos el contenedor con `docker run -d -p 7070:8080 --name jenkins jenkins`. Una vez creado podremos ver la página principal de Jenkins en `localhost:7070`. Para desbloquear Jenkins accedemos al contenedor, `docker exec -ti jenkins bash`, y ejecutamos el comando `cat /var/jenkins_home/secrets/initialAdminPassword`, obtenemos el texto devuelto y lo introducimos en el formulario. También se puede consultar mediante el comando `docker exec jenkins bash -c "cat /var/jenkins_home/secrets/initialAdminPassword"`.
 
 ---
 
@@ -180,7 +180,7 @@ Los volúmenes son herramientas que nos permiten almacenar datos persistentes de
 - Anonymus: son los volúmenes que se almacenan en una carpeta autogenerada por Docker.
 - Named Volumes: son volúmenes creados por nosotros, normalmente de carpetas administradas por Docker, pero a diferencia de los anonymus, sí tienen un nombre y son controlados por Docker.
 
-Se puede consultar los volúmenes con el comando `docker volume ls`. Para eliminar un volumen usamos `docker volume rm nombreVolumen`.
+Se puede consultar los volúmenes con el comando `docker volume ls`. Podemos crear volúmenes con `docker volume create nombreVolumen`. Para eliminar un volumen usamos `docker volume rm nombreVolumen`.
 
 ### Volume host
 En el comando de creación de un contenedor debemos añadir `-v carpetaLocal:carpetaContenedor`, quedando de esta forma `docker run -d -p 3306:3306 --name db -e "MYSQL_ROOT_PASSWORD=0000" -v /opt/mysql/:/var/lib/mysql mysql:5.7`. De esta forma, los archivos generados por el contenedor estarán también en nuestra máquina, por lo que, aunque se elimine el contenedor seguiremos teniendo sus datos. Para volver a crear el contenedor con los datos guardados, basta con volver a crear el contenedor con el mismo comando.
@@ -196,5 +196,8 @@ son los volúmenes que no están referenciados por ningún contenedor. Podemos v
 
 ---
 
-### Persistir datos en MongoDB
+### Persistir datos de MongoDB
 Creamos contenedor de MongoDB `docker run -d --name my-mongo -p 27017:27017 -v /opt/mongo/:/data/db mongo` de esta forma copiará los datos en nuestra carpeta `/opt/mongo`. Si eliminamos el contenedor, podemos recuperar la información ejecutanto nuevamente el mismo comando.
+
+### Persistir datos de Jenkins
+Creamos contenedor de Jenkins `docker run -d --name jenkins -p 8080:8080 -v /opt/jenkins/:var/jenkins_home jenkins` de esta forma copiará los datos en nuestra carpeta `/opt/jenkins`. Si eliminamos el contenedor, podemos recuperar la información ejecutanto nuevamente el mismo comando.
