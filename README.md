@@ -193,3 +193,8 @@ Para crear un named volume usamos el comando `docker volume create nombreVolumen
 
 ### Dangling volume
 son los volúmenes que no están referenciados por ningún contenedor. Podemos ver los dangling volumes con el comando `docker volume ls -f dangling=true`. Para eliminar estos volúmenes usaremos `docker volume ls -f dangling=true -q | xargs docker volume rm`.
+
+---
+
+### Persistir datos en MongoDB
+Creamos contenedor de MongoDB `docker run -d --name my-mongo -p 27017:27017 -v /opt/mongo/:/data/db mongo` de esta forma copiará los datos en nuestra carpeta `/opt/mongo`. Si eliminamos el contenedor, podemos recuperar la información ejecutanto nuevamente el mismo comando.
