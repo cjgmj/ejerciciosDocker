@@ -194,6 +194,9 @@ Para crear un named volume usamos el comando `docker volume create nombreVolumen
 ### Dangling volume
 son los volúmenes que no están referenciados por ningún contenedor. Podemos ver los dangling volumes con el comando `docker volume ls -f dangling=true`. Para eliminar estos volúmenes usaremos `docker volume ls -f dangling=true -q | xargs docker volume rm`.
 
+### Compartir volúmenes entre contenedores
+Se puede compartir volúmenes entre varios contenedores añadiéndole el mismo volumen en el comando de creación de los distintos contenedores. Los archivos no son sobrescritos al añadir un nuevo contenedor.
+
 ---
 
 ### Persistir datos de MongoDB
