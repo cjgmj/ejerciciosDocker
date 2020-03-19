@@ -190,3 +190,6 @@ En el comando de creación de un contenedor debemos añadir `-v carpetaContenedo
 
 ### Name volume
 Para crear un named volume usamos el comando `docker volume create nombreVolumen`, una vez ejecutado podremos ver la carpeta creada en la ruta del document root dentro de la carpeta volumes. Para asignarselo a un contenedor usamos el comando `docker run -d -p 3306:3306 --name db -e "MYSQL_ROOT_PASSWORD=0000" -v nombreVolumen:/var/lib/mysql mysql:5.7`. A diferencia del contenedor anónimo, si se elimina el contenedor con la opción `-v` no se eliminarán los datos.
+
+### Dangling volume
+son los volúmenes que no están referenciados por ningún contenedor. Podemos ver los dangling volumes con el comando `docker volume ls -f dangling=true`. Para eliminar estos volúmenes usaremos `docker volume ls -f dangling=true -q | xargs docker volume rm`.
