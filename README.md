@@ -31,7 +31,7 @@ Para ver los contenedores ejecutar `docker ps` y `docker ps -a`. Podemos ver el 
 
 Para crear un contenedor a partir de nuestra imagen ejecutar `docker run -d --name nombreContenedor imagen:tag`. Si el parámetro nombre no es añadido, Docker asigna un nombre. El parámetro `-d` es para ejecutar el contenedor en segundo plano. Se puede añadir el puerto en el que se va a ejecutar añadiendo `-p puertoLocal:puertoContenedor` después del nombre del contenedor, si se le indica, esto permite ver el servicio vía web.
 
-**Nota:** Para borrar un contenedor ejecutar `docker rm -fv nombreContenedor`. Se pueden eliminar todos los contenedores con `docker rm -fv $(docker ps -aq)`.
+**Nota:** Para borrar un contenedor ejecutar `docker rm -fv nombreContenedor`. Se pueden eliminar todos los contenedores con `docker rm -fv $(docker ps -aq)`. La `v` indica que se eliminará también el volumen.
 
 # Dockerfile
 El `Dockerfile` es el archivo donde se define la configuración de la imagen. 
@@ -100,7 +100,7 @@ Los contenedores son una instancia de ejecución de una imagen. Los contenedores
 Para listar contenedores se utiliza el comando `docker ps`, para listar también los que están detenidos usamos `docker ps -a`.
 
 ### Inspeccionar el contenedor
-Podemos ver todo el contenido del contenedor con `docker inspect nombreContenedor`.
+Podemos ver todo el contenido del contenedor con `docker inspect nombreContenedor`. Se puede filtrar añadiendo `| grep texto`, siendo texto cualquier cadena de texto.
 
 ### Información de los contenedores
 Podemos ver información relativa a los contenedores, por ejemplo la RAM que consume cada uno, mediante el comando `docker stats`. Esta consulta se puede filtrar por `nombreContenedor` o por el `idContenedor`.
@@ -182,3 +182,6 @@ Los volúmenes son herramientas que nos permiten almacenar datos persistentes de
 
 ### Volume host
 En el comando de creación de un contenedor debemos añadir `-v carpetaLocal:carpetaContenedor`, quedando de esta forma `docker run -d -p 3306:3306 --name db -e "MYSQL_ROOT_PASSWORD=0000" -v /opt/mysql/:/var/lib/mysql mysql:5.7`. De esta forma, los archivos generados por el contenedor estarán también en nuestra máquina, por lo que, aunque se elimine el contenedor seguiremos teniendo sus datos. Para volver a crear el contenedor con los datos guardados, basta con volver a crear el contenedor con el mismo comando.
+
+### Volume anonymus
+En el comando de creación de un contenedor debemos añadir `-v carpetaContenedor`, quedando de esta forma `docker run -d -p 3306:3306 --name db -e "MYSQL_ROOT_PASSWORD=0000" -v /var/lib/mysql mysql:5.7`. Esto creará la carpeta en la ruta del document root dentro de la carpeta volumes, con un nombre autogenerado por docker. Con estos contenedores hay dos problemas principales, el primero es el nombre que es complicado de memorizar, el segundo si al eliminar el contenedor añadimos `-v` también eliminaremos el volumen y por tanto los datos.
