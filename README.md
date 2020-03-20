@@ -1,5 +1,8 @@
 # ejerciciosDocker
 
+#### Instalación
+Para instalar Docker accedemos a [docker docs](https://docs.docker.com/install/) y seguimos los pasos para el sistema operativo que estemos usando.
+
 **Nota:** Podemos ver la ayuda de cualquier comando añadiendo `--help`.
 
 # Images
@@ -249,3 +252,9 @@ Esta es la red de nuestra máquina local por lo que el contenedor conectado a es
 
 ### Red None
 Esta es una red sirven para que los contenedores con a esta red no tengan red, por lo que no podrán comunicarse con los demás contenedores.
+
+# Compose
+Docker Compose es una herramienta de Docker que nos ayuda a crear aplicaciones multicontenedor, es decir, una aplicación que tiene varios contenedores. Con Docker Compose podemos definir los contenedores, imágenes, volúmentes, redes, etc, dentro de un archivo de texto, normalmente yaml o yml, el cuál se usará de base para crear todo el contenido.
+
+#### Instalación
+Para instalar Docker Compose accedemos a [docker docs](https://docs.docker.com/compose/install/) y seguimos los pasos para el sistema operativo que estemos usando.
