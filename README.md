@@ -243,3 +243,6 @@ Para eliminar una red ejecutamos `docker network rm nombreRed`. Es importante qu
 
 ### Asignar IP
 Para asignar una IP a un contenedor añadimos en el comando de creación del contenedor `--ip ip`. Para que funcione, la red en la que se conecta el contenedor debe tener asignada una subred y el gateway.
+
+### Red Host
+Esta es la red de nuestra máquina local por lo que el contenedor conectado a esta red hereda todos los componentes de la red de la máquina local, incluso el nombre de host. Solo se mantiene la red de la máquina local, misma IP, mismo DNS, mismas conexiones, etc.
