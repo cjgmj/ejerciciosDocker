@@ -234,3 +234,6 @@ Para agregar un contenedor a una red que no sea la por defecto, tenemos que aña
 
 ### Conectar contenedores en la misma red
 Si usamos `docker exec nombreContenedor bash -c "ping ipOtroContenedor"` referenciando a dos contenedores de la misma red podemos ver que se reciben respuestas. Al crear nuestra propia red, en la red por defecto de Docker no es posible, podemos hacer peticiones a través del nombre del contenedor con `docker exec nombreContenedor bash -c "ping nombreOtroContenedor"`.
+
+### Conectar contenedores en distintas redes
+Para conectar contenedores en distintas redes usaremos `docker network connect nombreRed nombreContenedor`, de esta forma conectamos el contenedor indicado con la red deseada. Para desconectar un contenedor de una red usamos `docker network disconnect nombreRed nombreContenedor`.
