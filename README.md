@@ -238,5 +238,8 @@ Si usamos `docker exec nombreContenedor bash -c "ping ipOtroContenedor"` referen
 ### Conectar contenedores en distintas redes
 Para conectar contenedores en distintas redes usaremos `docker network connect nombreRed nombreContenedor`, de esta forma conectamos el contenedor indicado con la red deseada. Para desconectar un contenedor de una red usamos `docker network disconnect nombreRed nombreContenedor`.
 
-### Eliminar redes
+### Eliminar red
 Para eliminar una red ejecutamos `docker network rm nombreRed`. Es importante que antes de eliminar una red desconectamos los contenedores que estén en esa red.
+
+### Asignar IP
+Para asignar una IP a un contenedor añadimos en el comando de creación del contenedor `--ip ip`. Para que funcione, la red en la que se conecta el contenedor debe tener asignada una subred y el gateway.
