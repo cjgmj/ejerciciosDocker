@@ -246,3 +246,6 @@ Para asignar una IP a un contenedor añadimos en el comando de creación del con
 
 ### Red Host
 Esta es la red de nuestra máquina local por lo que el contenedor conectado a esta red hereda todos los componentes de la red de la máquina local, incluso el nombre de host. Solo se mantiene la red de la máquina local, misma IP, mismo DNS, mismas conexiones, etc.
+
+### Red None
+Esta es una red sirven para que los contenedores con a esta red no tengan red, por lo que no podrán comunicarse con los demás contenedores.
