@@ -223,3 +223,6 @@ Podemos ver el listado de redes en docker mediante `docker network ls`, para ver
 
 ### Inspeccionar la red
 Podemos ver todo el contenido del contenedor con `docker network inspect nombreRed`. Se puede filtrar añadiendo `| grep texto`, siendo texto cualquier cadena de texto, podemos añadir `-C numeroLineas` el numero de líneas indican la cantidad de líneas superiores e inferiores que se mostrarán.
+
+### Crear red
+Para crear una red usamos `docker network create nombreRed`. Podemos crear una red definiendo el driver, la subred y el gateway, entre otras cosas, con `docker network create -d bridge --subnet ip/mascaraRed --gateway ip nombreRed`, ejemplo `docker network create -d bridge --subnet 172.124.10.0/24 --gateway 172.124.10.1 test`.
