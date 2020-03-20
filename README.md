@@ -211,7 +211,7 @@ Creamos contenedor de Jenkins `docker run -d --name jenkins -p 8080:8080 -v /opt
 Creamos contenedor de Nginx `docker run -d --name nginx -p 80:80 -v /opt/nginx/:/var/log/nginx nginx` de esta forma copiará los logs en nuestra carpeta `/opt/nginx`. De esta forma podemos acceder a los logs generados por Nginx en nuestra máquina local.
 
 # Networks
-Podemos ver la red por defecto de docker ejecutando `ip a | grep docker`, la red sería `docker0` en los resultados devueltos, el cual tiene un rango de subred asignado.
+Podemos ver la red por defecto de Docker ejecutando `ip a | grep docker`, la red sería `docker0` en los resultados devueltos, el cual tiene un rango de subred asignado.
 Hay varios tipos de redes:
 - Bridge
 - Host
@@ -221,7 +221,7 @@ Hay varios tipos de redes:
 Los contenedores que se encuentren en la misma red pueden comunircarse entre ellos. En la red bridge se pueden comunicar por la IP pero no por el nombre.
 
 ### Listar redes
-Podemos ver el listado de redes en docker mediante `docker network ls`, para ver la por defecto usamos `docker network ls | grep bridge`.
+Podemos ver el listado de redes en Docker mediante `docker network ls`, para ver la por defecto usamos `docker network ls | grep bridge`.
 
 ### Inspeccionar la red
 Podemos ver todo el contenido del contenedor con `docker network inspect nombreRed`. Se puede filtrar añadiendo `| grep texto`, siendo texto cualquier cadena de texto, podemos añadir `-C numeroLineas` el numero de líneas indican la cantidad de líneas superiores e inferiores que se mostrarán.
@@ -231,3 +231,6 @@ Para crear una red usamos `docker network create nombreRed`. Podemos crear una r
 
 ### Agregar contenedores a una red
 Para agregar un contenedor a una red que no sea la por defecto, tenemos que añadir en el comando de creación del contenedor `--network nombreRed`.
+
+### Conectar contenedores en la misma red
+Si usamos `docker exec nombreContenedor bash -c "ping ipOtroContenedor"` referenciando a dos contenedores de la misma red podemos ver que se reciben respuestas. Al crear nuestra propia red, en la red por defecto de Docker no es posible, podemos hacer peticiones a través del nombre del contenedor con `docker exec nombreContenedor bash -c "ping nombreOtroContenedor"`.
