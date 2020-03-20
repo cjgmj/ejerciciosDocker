@@ -1,5 +1,7 @@
 # ejerciciosDocker
 
+**Nota:** Podemos ver la ayuda de cualquier comando añadiendo `--help`.
+
 # Images
 Para ver las imágenes escribir en la terminal `docker images`. Se puede filtar mediante `| grep nombreImagen`, no es necesario el nombre completo.
 En las imágenes viene toda la configuración que necesita un contenedor para funcionar.
@@ -226,3 +228,6 @@ Podemos ver todo el contenido del contenedor con `docker network inspect nombreR
 
 ### Crear red
 Para crear una red usamos `docker network create nombreRed`. Podemos crear una red definiendo el driver, la subred y el gateway, entre otras cosas, con `docker network create -d bridge --subnet ip/mascaraRed --gateway ip nombreRed`, ejemplo `docker network create -d bridge --subnet 172.124.10.0/24 --gateway 172.124.10.1 test`.
+
+### Agregar contenedores a una red
+Para agregar un contenedor a una red que no sea la por defecto, tenemos que añadir en el comando de creación del contenedor `--network nombreRed`.
