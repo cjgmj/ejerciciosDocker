@@ -100,7 +100,7 @@ Los contenedores son una instancia de ejecución de una imagen. Los contenedores
 Para listar contenedores se utiliza el comando `docker ps`, para listar también los que están detenidos usamos `docker ps -a`.
 
 ### Inspeccionar el contenedor
-Podemos ver todo el contenido del contenedor con `docker inspect nombreContenedor`. Se puede filtrar añadiendo `| grep texto`, siendo texto cualquier cadena de texto.
+Podemos ver todo el contenido del contenedor con `docker inspect nombreContenedor`. Se puede filtrar añadiendo `| grep texto`, siendo texto cualquier cadena de texto, podemos añadir `-C numeroLineas` el numero de líneas indican la cantidad de líneas superiores e inferiores que se mostrarán.
 
 ### Información de los contenedores
 Podemos ver información relativa a los contenedores, por ejemplo la RAM que consume cada uno, mediante el comando `docker stats`. Esta consulta se puede filtrar por `nombreContenedor` o por el `idContenedor`.
@@ -207,3 +207,19 @@ Creamos contenedor de Jenkins `docker run -d --name jenkins -p 8080:8080 -v /opt
 
 ### Persistir logs de Nginx
 Creamos contenedor de Nginx `docker run -d --name nginx -p 80:80 -v /opt/nginx/:/var/log/nginx nginx` de esta forma copiará los logs en nuestra carpeta `/opt/nginx`. De esta forma podemos acceder a los logs generados por Nginx en nuestra máquina local.
+
+# Networks
+Podemos ver la red por defecto de docker ejecutando `ip a | grep docker`, la red sería `docker0` en los resultados devueltos, el cual tiene un rango de subred asignado.
+Hay varios tipos de redes:
+- Bridge
+- Host
+- None
+- Overlay
+
+Los contenedores que se encuentren en la misma red pueden comunircarse entre ellos. En la red bridge se pueden comunicar por la IP pero no por el nombre.
+
+### Listar redes
+Podemos ver el listado de redes en docker mediante `docker network ls`, para ver la por defecto usamos `docker network ls | grep bridge`.
+
+### Inspeccionar la red
+Podemos ver todo el contenido del contenedor con `docker network inspect nombreRed`. Se puede filtrar añadiendo `| grep texto`, siendo texto cualquier cadena de texto, podemos añadir `-C numeroLineas` el numero de líneas indican la cantidad de líneas superiores e inferiores que se mostrarán.
