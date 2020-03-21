@@ -260,13 +260,13 @@ Docker Compose es una herramienta de Docker que nos ayuda a crear aplicaciones m
 Para instalar Docker Compose accedemos a [docker docs](https://docs.docker.com/compose/install/) y seguimos los pasos para el sistema operativo que estemos usando.
 
 ### Crear contenedor con Docker Compose
-Para crear un contenedor con Docker Compose, crearemos el archivo `docker-compose.yml`. Una vez terminado el archivo y en la carpeta del archivo, usamos `docker-compose up -d`, con esto docker crea una red por defecto para conectar el contenedor y lo levanta.
+Para crear un contenedor con Docker Compose, crearemos el archivo `docker-compose.yml`. Una vez terminado el archivo y en la carpeta del archivo, usamos `docker-compose up -d`, con esto docker crea una red por defecto para conectar el contenedor y lo levanta. Se puede crear un contenedor a partir de un archivo indicándole el nombre con `-f nombreArchivo` en el comando.
 
 ### Parar contenedor con Docker Compose
 Para parar un contenedor ejecutamos `docker-compose down` mientras estamos situados en la carpeta del archivo, este comando primero para el contenedor, seguidamente lo elimina y por último elimina la red que creó en el arranque.
 
 ### Variables de entorno en Docker Compose
-Hay dos formas de definir variables de entorno, la primera sería introduciéndola, como una lista, directamente en el archivo yml, y la segunda sería introduciéndolas en un archivo y referenciarlo dentro del yml.
+Hay dos formas de definir variables de entorno, la primera sería introduciéndola, como una lista, directamente en el fichero yml, y la segunda sería introduciéndolas en un archivo y referenciarlo dentro del yml.
 
 ### Volúmenes en Docker Compose
 Para montar un volumen con Docker Compose primero tenemos que definir el volumen y despúes asignarlo dentro del contenedor, en formato lista. Al ejecutar el comando de creación creará un volumen y podremos acceder al volumen a través del nombre. Al parar el contenedor eliminará todo excepto el volumen, por lo que al volver a arrancarlo tomará los datos del volumen ya creado. Para crear un volumen de host solo haría falta definirlo dentro del contenedor.
@@ -275,7 +275,10 @@ Para montar un volumen con Docker Compose primero tenemos que definir el volumen
 Para crear una red con Docker Compose primero tenemos que definir la red y después asignarla dentro del contenedor. El nombre de la red será `carpetaActual_nombreRed`. Al crear varios contenedores dentro de la misma red, se pueden comunicar tanto por el nombre del contenedor como por el nombre del servicio.
 
 ### Imágenes en Docker Compose
-Para contruir una imagen definimos `build` en el archivo yml y definiendo el nombre en `image`. Podemos usar varias opciones. Con `.`: Esto, por defecto, buscará un `Dockerfile` en la misma ruta en la que se encuentra el fichero. Añadiendo `context` para indicar la carpeta en la que está el `Dockerfile` y `dockerfile` para indicar el nombre del archivo.
+Para contruir una imagen definimos `build` en el fichero yml y definiendo el nombre en `image`. Podemos usar varias opciones. Con `.`: Esto, por defecto, buscará un `Dockerfile` en la misma ruta en la que se encuentra el fichero. Añadiendo `context` para indicar la carpeta en la que está el `Dockerfile` y `dockerfile` para indicar el nombre del archivo.
 
 ### Sobrescribir CMD en Docker Compose
 Para sobrescribir el CMD de una imagen sin necesidad de crear el `Dockerfile` añadimos dentro del contenedor `command` con el comando que queremos ejecutar en lugar del CMD.
+
+### Limitar recursos en contenedores
+Se puede limitar los recursos de un contenedor añadiendo la configuración dentro del contenedor en el fichero yml.
