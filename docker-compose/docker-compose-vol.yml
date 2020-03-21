@@ -5,5 +5,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - "/opt/nginx/html:/usr/share/nginx/html"
+      - "vol2:/usr/share/nginx/html"
     image: nginx
+volumes:
+  vol2: 

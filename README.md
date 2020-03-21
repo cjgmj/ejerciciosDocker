@@ -267,3 +267,6 @@ Para parar un contenedor ejecutamos `docker-compose down` mientras estamos situa
 
 ### Variables de entorno en Docker Compose
 Hay dos formas de definir variables de entorno, la primera sería introduciéndola, como una lista, directamente en el archivo yml, y la segunda sería introduciéndolas en un archivo y referenciarlo dentro del yml.
+
+### Volúmenes en Docker Compose
+Para montar un volumen con Docker Compose primero tenemos que definir el volumen y despúes asignarlo dentro del contenedor, en formato lista. Al ejecutar el comando de creación creará un volumen y podremos acceder al volumen a través del nombre. Al parar el contenedor eliminará todo excepto el volumen, por lo que al volver a arrancarlo tomará los datos del volumen ya creado. Para crear un volumen de host solo haría falta definirlo dentro del contenedor.
