@@ -1,6 +1,7 @@
 version: '3'
 services:
   web:
+    container_name: web
     image: centos
     command: python -m SimpleHTTPServer 8080
     ports:

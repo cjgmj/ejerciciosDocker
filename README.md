@@ -294,3 +294,6 @@ Podemos acceder a la [política de reinicio](https://docs.docker.com/config/cont
 - `no`: no se reinicia automáticamente el contenedor.
 
 **Nota:** Podemos observar un comando con `watch -d comandoObservado`, por ejemplo `watch -d docker ps`.
+
+### Personalizar nombre proyecto
+Para cambiar el prefijo que acompaña al nombre de los volumenes y de las redes añadimos en el comando creación del contenedor con Docker Compose `-p nombrePrefijo`, de esta forma definimos el nombre del proyecto.
