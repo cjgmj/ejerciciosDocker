@@ -300,3 +300,6 @@ Podemos acceder a la [política de reinicio](https://docs.docker.com/config/cont
 
 ### Personalizar nombre proyecto
 Para cambiar el prefijo que acompaña al nombre de los volumenes y de las redes añadimos en el comando creación del contenedor con Docker Compose `-p nombrePrefijo`, de esta forma definimos el nombre del proyecto.
+
+# Registry
+Un [Docker Registry](https://docs.docker.com/registry/) no es más que un servicio donde podemos subir y bajar imágenes. Para crear un registry usamos `docker run -d -p puertoLocal:puertoContenedor --name nombreRegistry registry:versionRegistry`. Para que sea persistente necesitamos indicar un volumen mediante `-v carpetaLocal:carpetaContenedor`. Por ejemplo `docker run -d -p 5000:5000 --name registry -v $PWD/data:/var/lib/registry registry:2`, de esta forma ya tenemos un servicio de registry en nuestra máquina local. 
