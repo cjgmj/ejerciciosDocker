@@ -1,9 +1,18 @@
 version: '3'
 services:
   web:
-    container_name: nginx
+    container_name: httpd
     ports:
       - "8080:80"
-    volumes:
-      - "/opt/nginx/html:/usr/share/nginx/html"
-    image: nginx
+    networks:
+      - net-test
+    image: httpd
+  web2:
+    container_name: httpd2
+    ports:
+      - "8081:80"
+    networks:
+      - net-test
+    image: httpd
+networks:
+  net-test:
