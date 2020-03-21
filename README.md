@@ -254,7 +254,7 @@ Esta es la red de nuestra máquina local por lo que el contenedor conectado a es
 Esta es una red sirven para que los contenedores con a esta red no tengan red, por lo que no podrán comunicarse con los demás contenedores.
 
 # Compose
-Docker Compose es una herramienta de Docker que nos ayuda a crear aplicaciones multicontenedor, es decir, una aplicación que tiene varios contenedores. Con Docker Compose podemos definir los contenedores, imágenes, volúmentes, redes, etc, dentro de un archivo de texto, normalmente yaml o yml, el cuál se usará de base para crear todo el contenido, por defecto se llama `docker-compose.yml`. El Docker Compose se compone de cuatro partes: version ([versión](https://docs.docker.com/compose/compose-file/compose-versioning/) de Docker Compose que se usará en la creación) y services, que son obligatorias, volumes y networks que son opcionales. Podemos ver como componer un documento en [docker docs](https://docs.docker.com/compose/compose-file/). En un mismo archivo puedes crear tantos contenedores como necesites.
+Docker Compose es una herramienta de Docker que nos ayuda a crear aplicaciones multicontenedor, es decir, una aplicación que tiene varios contenedores. Con Docker Compose podemos definir los contenedores, imágenes, volúmentes, redes, etc, dentro de un archivo de texto, normalmente yaml o yml, el cuál se usará de base para crear todo el contenido, por defecto se llama `docker-compose.yml`. El Docker Compose se compone de cuatro partes: version ([versión](https://docs.docker.com/compose/compose-file/compose-versioning/) de Docker Compose que se usará en la creación) y services, que son obligatorias, volumes y networks que son opcionales. Podemos ver como componer un documento en [docker docs](https://docs.docker.com/compose/compose-file/). En un mismo archivo puedes crear tantos contenedores como necesites. Para indicar que es necesario un contenedor antes de crear otro podemos añadir `depends_on` con el nombre del contenedor. Podemos ver todas las opciones escribiendo `docker-compose`.
 
 #### Instalación
 Para instalar Docker Compose accedemos a [docker docs](https://docs.docker.com/compose/install/) y seguimos los pasos para el sistema operativo que estemos usando.
@@ -268,11 +268,14 @@ Para crear un contenedor con Docker Compose, crearemos el archivo `docker-compos
 ### Parar contenedor con Docker Compose
 Para parar un contenedor ejecutamos `docker-compose down` mientras estamos situados en la carpeta del archivo, este comando primero para el contenedor, seguidamente lo elimina y por último elimina la red que creó en el arranque.
 
+### Logs contenedor con Docker Compose
+Podemos ver los logs de un contenedor ejecutando `docker-compose logs -f`.
+
 ### Variables de entorno en Docker Compose
 Hay dos formas de definir variables de entorno, la primera sería introduciéndola, como una lista, directamente en el fichero yml, y la segunda sería introduciéndolas en un archivo y referenciarlo dentro del yml.
 
 ### Volúmenes en Docker Compose
-Para montar un volumen con Docker Compose primero tenemos que definir el volumen y despúes asignarlo dentro del contenedor, en formato lista. Al ejecutar el comando de creación creará un volumen y podremos acceder al volumen a través del nombre. Al parar el contenedor eliminará todo excepto el volumen, por lo que al volver a arrancarlo tomará los datos del volumen ya creado. Para crear un volumen de host solo haría falta definirlo dentro del contenedor.
+Para montar un volumen con Docker Compose primero tenemos que definir el volumen y despúes asignarlo dentro del contenedor, en formato lista. Al ejecutar el comando de creación creará un volumen y podremos acceder al volumen a través del nombre. Al parar el contenedor eliminará todo excepto el volumen, por lo que al volver a arrancarlo tomará los datos del volumen ya creado. Para crear un volumen de host solo haría falta definirlo dentro del contenedor. Podemos crear un contenedor en el directorio actual con `$PWD` o con  `.`.
 
 ### Redes en Docker Compose
 Para crear una red con Docker Compose primero tenemos que definir la red y después asignarla dentro del contenedor. El nombre de la red será `carpetaActual_nombreRed`. Al crear varios contenedores dentro de la misma red, se pueden comunicar tanto por el nombre del contenedor como por el nombre del servicio.
