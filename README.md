@@ -254,7 +254,13 @@ Esta es la red de nuestra máquina local por lo que el contenedor conectado a es
 Esta es una red sirven para que los contenedores con a esta red no tengan red, por lo que no podrán comunicarse con los demás contenedores.
 
 # Compose
-Docker Compose es una herramienta de Docker que nos ayuda a crear aplicaciones multicontenedor, es decir, una aplicación que tiene varios contenedores. Con Docker Compose podemos definir los contenedores, imágenes, volúmentes, redes, etc, dentro de un archivo de texto, normalmente yaml o yml, el cuál se usará de base para crear todo el contenido.
+Docker Compose es una herramienta de Docker que nos ayuda a crear aplicaciones multicontenedor, es decir, una aplicación que tiene varios contenedores. Con Docker Compose podemos definir los contenedores, imágenes, volúmentes, redes, etc, dentro de un archivo de texto, normalmente yaml o yml, el cuál se usará de base para crear todo el contenido, por defecto se llama `docker-compose.yml`. El Docker Compose se compone de cuatro partes: version ([versión](https://docs.docker.com/compose/compose-file/compose-versioning/) de Docker Compose que se usará en la creación) y services, que son obligatorias, volumes y networks que son opcionales. Podemos ver como componer un documento en [docker docs](https://docs.docker.com/compose/compose-file/).
 
 #### Instalación
 Para instalar Docker Compose accedemos a [docker docs](https://docs.docker.com/compose/install/) y seguimos los pasos para el sistema operativo que estemos usando.
+
+### Crear contenedor con Docker Compose
+Para crear un contenedor con Docker Compose, crearemos el archivo `docker-compose.yml`. Una vez terminado el archivo y en la carpeta del archivo, usamos `docker-compose up -d`, con esto docker crea una red por defecto para conectar el contenedor y lo levanta.
+
+### Parar contenedor con Docker Compose
+Para parar un contenedor ejecutamos `docker-compose down` mientras estamos situados en la carpeta del archivo, este comando primero para el contenedor, seguidamente lo elimina y por último elimina la red que creó en el arranque.
