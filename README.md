@@ -264,3 +264,6 @@ Para crear un contenedor con Docker Compose, crearemos el archivo `docker-compos
 
 ### Parar contenedor con Docker Compose
 Para parar un contenedor ejecutamos `docker-compose down` mientras estamos situados en la carpeta del archivo, este comando primero para el contenedor, seguidamente lo elimina y por último elimina la red que creó en el arranque.
+
+### Variables de entorno en Docker Compose
+Hay dos formas de definir variables de entorno, la primera sería introduciéndola, como una lista, directamente en el archivo yml, y la segunda sería introduciéndolas en un archivo y referenciarlo dentro del yml.
