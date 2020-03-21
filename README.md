@@ -111,7 +111,7 @@ Podemos ver todo el contenido del contenedor con `docker inspect nombreContenedo
 Podemos ver información relativa a los contenedores, por ejemplo la RAM que consume cada uno, mediante el comando `docker stats`. Esta consulta se puede filtrar por `nombreContenedor` o por el `idContenedor`.
 
 ### Crear contenedor
-Para crear un contenedor necesitamos una imagen, que se usará de base. Una vez tengamos una imagen, ejecutamos el comando `docker run -d nombreImagen`, `-d` indica que el contenedor se ejecutará en segundo plano. Se usa `-dti` o `-d -ti` si la imagen tiene un sistema operativo. Se puede añadir un nombre con `--name nombreContenedor`. Para poder ver la imagen en el navegador debemos mapear el puerto añadiéndole al comando `-p puertoMaquina:puertoContenedor`, si ya hay un contenedor levantado, el nombre de la imagen se sitúa al final, el `puertoMaquina` es el puerto al que se quiere mapear, no necesariamente tiene que ser el `puertoContenedor`. Se puede crear una variable de entorno añadiendo `-e "nombreVariable=valorVariable"`. Si la imagen no está descargada previamente, se descargará automáticamente antes de crear el contenedor.
+Para crear un contenedor necesitamos una imagen, que se usará de base. Una vez tengamos una imagen, ejecutamos el comando `docker run -d nombreImagen`, `-d` indica que el contenedor se ejecutará en segundo plano. Se usa `-dti` o `-d -ti` si la imagen tiene un sistema operativo. Se puede añadir un nombre con `--name nombreContenedor`. Para poder ver la imagen en el navegador debemos mapear el puerto añadiéndole al comando `-p puertoMaquina:puertoContenedor`, si ya hay un contenedor levantado, el nombre de la imagen se sitúa al final, el `puertoMaquina` es el puerto al que se quiere mapear, no necesariamente tiene que ser el `puertoContenedor`. Se puede crear una variable de entorno añadiendo `-e "nombreVariable=valorVariable"`. Si la imagen no está descargada previamente, se descargará automáticamente antes de crear el contenedor. Se puede añadir la política de reinicio añadiendo al comando `--restart politicaReinicio`, por defecto es `no`.
 
 ### Borrar contenedor
 Para borrar un contenedor se utiliza el comando `docker rm -f nombreContenedor`, el `-f` fuerza el borrado del contenedor, por si el contenedor está arrancado, se pueden pasar varios contenedores en el mismo comando separados por espacios. Se pueden eliminar todos los contenedores a la vez con `docker ps -q | xargs docker rm -f`.
@@ -259,6 +259,9 @@ Docker Compose es una herramienta de Docker que nos ayuda a crear aplicaciones m
 #### Instalación
 Para instalar Docker Compose accedemos a [docker docs](https://docs.docker.com/compose/install/) y seguimos los pasos para el sistema operativo que estemos usando.
 
+### Contruir imagen con Docker Compose
+Para construir una imagen con Docker Compose nos situamos en la carpeta del `Dockerfile` y ejecutamos `docker-compose build`.
+
 ### Crear contenedor con Docker Compose
 Para crear un contenedor con Docker Compose, crearemos el archivo `docker-compose.yml`. Una vez terminado el archivo y en la carpeta del archivo, usamos `docker-compose up -d`, con esto docker crea una red por defecto para conectar el contenedor y lo levanta. Se puede crear un contenedor a partir de un archivo indicándole el nombre con `-f nombreArchivo` en el comando.
 
@@ -282,3 +285,12 @@ Para sobrescribir el CMD de una imagen sin necesidad de crear el `Dockerfile` a�
 
 ### Limitar recursos en contenedores
 Se puede limitar los recursos de un contenedor añadiendo la configuración dentro del contenedor en el fichero yml.
+
+### Política de reinicio de contenedores
+Podemos acceder a la [política de reinicio](https://docs.docker.com/config/containers/start-containers-automatically/) para ver las condiciones en las cuales un contenedor debe ser reiniciado, el valor por defecto es `no`. Para decirle a Docker que reinicie los contenedores bajo ciertas circunstancias. Esto lo podemos definir con `restart` dentro del fichero yml. Permite varios valores:
+- `always`: siempre reinicia el contenedor cuando se detiene.
+- `unless-stopped`: se reinicia el contenedor cuando se detiene a no ser que se haya detenido manualmente.
+- `on-failure`: se reinicia cuando sucede un error interno en el contenedor.
+- `no`: no se reinicia automáticamente el contenedor.
+
+**Nota:** Podemos observar un comando con `watch -d comandoObservado`, por ejemplo `watch -d docker ps`.
