@@ -276,3 +276,6 @@ Para crear una red con Docker Compose primero tenemos que definir la red y despu
 
 ### Imágenes en Docker Compose
 Para contruir una imagen definimos `build` en el archivo yml y definiendo el nombre en `image`. Podemos usar varias opciones. Con `.`: Esto, por defecto, buscará un `Dockerfile` en la misma ruta en la que se encuentra el fichero. Añadiendo `context` para indicar la carpeta en la que está el `Dockerfile` y `dockerfile` para indicar el nombre del archivo.
+
+### Sobrescribir CMD en Docker Compose
+Para sobrescribir el CMD de una imagen sin necesidad de crear el `Dockerfile` añadimos dentro del contenedor `command` con el comando que queremos ejecutar en lugar del CMD.
