@@ -41,6 +41,9 @@ Para crear un contenedor a partir de nuestra imagen ejecutar `docker run -d --na
 # Dockerfile
 El `Dockerfile` es el archivo donde se define la configuración de la imagen. 
 
+### escape
+Se usa para definir el carácter usado para escapar carácteres, por defecto es `\`.
+
 ### FROM
 Es la imagen o el sistema operativo que será la base de nuestra imagen personalizada. Se les pueden añadir alias con `as`.
 
@@ -52,6 +55,9 @@ Sirve para copiar archivos de nuestra máquina hacia la imagen. Se debe usar `CO
 
 ### ENV
 Sirve para definir variables de entorno.
+
+### ARG
+Define variables a las que el usuario podrá dar un valor en la construcción usando `--build-arg nombreArg=valor`. Si el usuario intenta introducir un argumente que no esté definido se devolverá un error. Puede tener valores por defecto que será usado si no se le pasa en la construcción.
 
 ### WORKDIR
 Indica dónde se está trabajando actualmente, es decir, sirve para cambiar de carpeta para la ejecución de los comandos. Funciona como el `cd`.
@@ -70,6 +76,9 @@ Es una forma de colocar los datos de forma persistente dentro del contenedor, pa
 
 ### CMD
 Es lo que mantiene vivo el contenedor, puede ser un proceso en primer plano que siempre se ejecute, pero también puede ser un script.
+
+### ENTRYPOINT
+Te permite configurar un contenedor que actuará como un ejecutable.
 
 ### .dockerignore
 Es un archivo oculto. Sirve para ignorar cualquier cosa que esté en el directorio de trabajo actual.
