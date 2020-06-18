@@ -39,7 +39,7 @@ Para crear un contenedor a partir de nuestra imagen ejecutar `docker run -d --na
 **Nota:** Para borrar un contenedor ejecutar `docker rm -fv nombreContenedor`. Se pueden eliminar todos los contenedores con `docker rm -fv $(docker ps -aq)`. La `v` indica que se eliminará también el volumen.
 
 # Dockerfile
-El `Dockerfile` es el archivo donde se define la configuración de la imagen. 
+El `Dockerfile` es el archivo donde se define la configuración de la imagen. Se pueden añadir comentarios poniendo `#`.
 
 ### escape
 Se usa para definir el carácter usado para escapar carácteres, por defecto es `\`.
@@ -114,7 +114,7 @@ Los contenedores son una instancia de ejecución de una imagen. Los contenedores
 Para listar contenedores se utiliza el comando `docker ps`, para listar también los que están detenidos usamos `docker ps -a`.
 
 ### Inspeccionar el contenedor
-Podemos ver todo el contenido del contenedor con `docker inspect nombreContenedor`. Se puede filtrar añadiendo `| grep texto`, siendo texto cualquier cadena de texto, podemos añadir `-C numeroLineas` el numero de líneas indican la cantidad de líneas superiores e inferiores que se mostrarán.
+Podemos ver todo el contenido del contenedor con `docker inspect nombreContenedor`. Se puede filtrar añadiendo `| grep texto`, siendo texto cualquier cadena de texto, podemos añadir `-C numeroLineas` el numero de líneas indican la cantidad de líneas superiores e inferiores que se mostrarán. Podemos acceder a la dirección IP del contenedor mediante `docker inspect -f '{{ .NetworkSettings.IPAddress }}' nombreContenedor`.
 
 ### Información de los contenedores
 Podemos ver información relativa a los contenedores, por ejemplo la RAM que consume cada uno, mediante el comando `docker stats`. Esta consulta se puede filtrar por `nombreContenedor` o por el `idContenedor`.
@@ -123,7 +123,7 @@ Podemos ver información relativa a los contenedores, por ejemplo la RAM que con
 Para crear un contenedor necesitamos una imagen, que se usará de base. Una vez tengamos una imagen, ejecutamos el comando `docker run -d nombreImagen`, `-d` indica que el contenedor se ejecutará en segundo plano. Se usa `-dti` o `-d -ti` si la imagen tiene un sistema operativo. Se puede añadir un nombre con `--name nombreContenedor`. Para poder ver la imagen en el navegador debemos mapear el puerto añadiéndole al comando `-p puertoMaquina:puertoContenedor`, si ya hay un contenedor levantado, el nombre de la imagen se sitúa al final, el `puertoMaquina` es el puerto al que se quiere mapear, no necesariamente tiene que ser el `puertoContenedor`. Se puede crear una variable de entorno añadiendo `-e "nombreVariable=valorVariable"`. Si la imagen no está descargada previamente, se descargará automáticamente antes de crear el contenedor. Se puede añadir la política de reinicio añadiendo al comando `--restart politicaReinicio`, por defecto es `no`.
 
 ### Borrar contenedor
-Para borrar un contenedor se utiliza el comando `docker rm -f nombreContenedor`, el `-f` fuerza el borrado del contenedor, por si el contenedor está arrancado, se pueden pasar varios contenedores en el mismo comando separados por espacios. Se pueden eliminar todos los contenedores a la vez con `docker ps -q | xargs docker rm -f`.
+Para borrar un contenedor se utiliza el comando `docker rm -f nombreContenedor`, el `-f` fuerza el borrado del contenedor, por si el contenedor está arrancado, se pueden pasar varios contenedores en el mismo comando separados por espacios. Se pueden eliminar todos los contenedores a la vez con `docker ps -q | xargs docker rm -f`. Se pueden eliminar todos los contenedores que estén en ejecución con `docker rm -f $(docker ps -a -q)`.
 
 ### Renombrar contenedor
 Se puede renombrar un contenedor ya existente con `docker rename nombreAntiguo nombreNuevo`.
