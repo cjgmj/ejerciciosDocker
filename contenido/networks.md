@@ -16,7 +16,7 @@ Se podrá ver el listado de redes en Docker mediante `docker network ls`, para v
 
 ## Inspeccionar la red
 
-Se podrá ver todo el contenido del contenedor con `docker network inspect nombreRed`. Se puede filtrar añadiendo `| grep texto`, siendo texto cualquier cadena de texto. Se puede añadir `-C numeroLineas`, siendo el numero de líneas el que indica la cantidad de líneas superiores e inferiores que se mostrarán.
+Se podrá ver todo el contenido del contenedor con el comando `docker network inspect nombreRed`. Se puede filtrar añadiendo `| grep texto`, siendo texto cualquier cadena de texto. Se puede añadir `-C numeroLineas`, siendo el numero de líneas el que indica la cantidad de líneas superiores e inferiores que se mostrarán.
 
 ## Crear red
 
@@ -24,11 +24,11 @@ Para crear una red usar `docker network create nombreRed`. Se puede crear una re
 
 ## Agregar contenedores a una red
 
-Para agregar un contenedor a una red que no sea la por defecto, se tendrá que añadir en el comando de creación del contenedor `--network nombreRed`.
+Para agregar un contenedor a una red que no sea la red por defecto, se tendrá que añadir en el comando de creación del contenedor `--network nombreRed`.
 
 ## Conectar contenedores en la misma red
 
-Si se usa `docker exec nombreContenedor bash -c "ping ipOtroContenedor"` referenciando a dos contenedores de la misma red se puede ver que se reciben respuestas. Al crear nuestra propia red, en la red por defecto de Docker no es posible, se pueden hacer peticiones a través del nombre del contenedor con `docker exec nombreContenedor bash -c "ping nombreOtroContenedor"`.
+Si se usa `docker exec nombreContenedor bash -c "ping ipOtroContenedor"` referenciando a dos contenedores de la misma red se puede ver que se reciben respuestas. Al crear nuestra propia red se pueden hacer peticiones a través del nombre del contenedor con `docker exec nombreContenedor bash -c "ping nombreOtroContenedor"`, esto no es posible hacerlo en la red por defecto de Docker.
 
 ## Conectar contenedores en distintas redes
 
@@ -40,7 +40,7 @@ Para eliminar una red se ejecuta `docker network rm nombreRed`. Es importante qu
 
 ## Asignar IP
 
-Para asignar una IP a un contenedor añadir en el comando de creación del contenedor `--ip ip`. Para que funcione, la red en la que se conecta el contenedor debe tener asignada una subred y el gateway.
+Para asignar una IP a un contenedor añadir en el comando de creación del contenedor `--ip ip`. Para que funcione, la red en la que se conecta el contenedor debe tener asignada una subred y un gateway.
 
 ## Red Host
 

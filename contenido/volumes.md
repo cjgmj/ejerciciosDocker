@@ -1,12 +1,12 @@
 # Volumes
 
-Los volúmenes son herramientas que permiten almacenar datos persistentes del contenedor en nuestra máquina local. Hay tres tipos de volúmenes:
+Los volúmenes son herramientas que permiten almacenar datos persistentes de un contenedor en nuestra máquina local. Hay tres tipos de volúmenes:
 
-- Host: son los volúmenes que se almacenan en el localhost y que viven en una carpeta, dentro de nuestro sistema de archivos, definida por nosotros.
+- Host: son los volúmenes que se almacenan en el localhost y que viven en una carpeta definida por nosotros dentro de nuestro sistema de archivos.
 - Anonymus: son los volúmenes que se almacenan en una carpeta autogenerada por Docker.
 - Named Volumes: son volúmenes creados por nosotros, normalmente de carpetas administradas por Docker, pero a diferencia de los anonymus, sí tienen un nombre y son controlados por Docker.
 
-Se puede consultar los volúmenes con el comando `docker volume ls`. Se pueden crear volúmenes con `docker volume create nombreVolumen`. Para eliminar un volumen ejecutar `docker volume rm nombreVolumen`.
+Se puede consultar los volúmenes con el comando `docker volume ls`. Se pueden crear volúmenes ejecutando `docker volume create nombreVolumen`. Para eliminar un volumen hay que ejecutar `docker volume rm nombreVolumen`.
 
 ## Volume host
 
@@ -18,11 +18,11 @@ En el comando de creación de un contenedor se debe añadir `-v carpetaContenedo
 
 ## Name volume
 
-Para crear un named volume se usará el comando `docker volume create nombreVolumen`, una vez ejecutado se podrá ver la carpeta creada en la ruta del document root dentro de la carpeta volumes. Para asignarselo a un contenedor usar el comando `docker run -d -p 3306:3306 --name db -e "MYSQL_ROOT_PASSWORD=0000" -v nombreVolumen:/var/lib/mysql mysql:5.7`. A diferencia del contenedor anónimo, si se elimina el contenedor con la opción `-v` no se eliminarán los datos.
+Para crear un named volume se usará el comando `docker volume create nombreVolumen`, una vez ejecutado se podrá ver la carpeta creada en la ruta del document root dentro de la carpeta volumes. Para asignarselo a un contenedor hay que usar el comando `docker run -d -p 3306:3306 --name db -e "MYSQL_ROOT_PASSWORD=0000" -v nombreVolumen:/var/lib/mysql mysql:5.7`. A diferencia del contenedor anónimo, si se elimina el contenedor con la opción `-v` no se eliminarán los datos.
 
 ## Dangling volume
 
-son los volúmenes que no están referenciados por ningún contenedor. Se pueden ver los dangling volumes con el comando `docker volume ls -f dangling=true`. Para eliminar estos volúmenes usar el comando `docker volume ls -f dangling=true -q | xargs docker volume rm`.
+Son los volúmenes que no están referenciados por ningún contenedor. Se pueden ver los dangling volumes con el comando `docker volume ls -f dangling=true`. Para eliminar estos volúmenes usar el comando `docker volume ls -f dangling=true -q | xargs docker volume rm`.
 
 ## Compartir volúmenes entre contenedores
 

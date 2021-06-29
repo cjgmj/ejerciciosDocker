@@ -40,7 +40,7 @@ Para contruir una imagen hay que definir `build` en el fichero yml y definir el 
 
 ## Sobrescribir CMD en Docker Compose
 
-Para sobrescribir el CMD de una imagen sin necesidad de crear el `Dockerfile` hay que añadir dentro del contenedor `command` con el comando que se quiera ejecutar en lugar del CMD.
+Para sobrescribir el `CMD` de una imagen sin necesidad de crear el `Dockerfile` hay que añadir dentro del contenedor `COMMAND` con el comando que se quiera ejecutar en lugar del `CMD`.
 
 ## Limitar recursos en contenedores
 
